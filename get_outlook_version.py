@@ -7,13 +7,15 @@ or it returns the error message.
 
 """
 
-from winreg import HKEY_CLASSES_ROOT, OpenKey, QueryValueEx
-
 __author__ = "Walter Reeves"
+
+from winreg import HKEY_CLASSES_ROOT, OpenKey, QueryValueEx
 
 
 def entrypoint() -> dict:
-    """Gets the outlook version from the Windows registry."""
+    """Gets the outlook version from the Windows registry.
+       Returns a dictionary with the version values."""
+
     version = {}
 
     try:
