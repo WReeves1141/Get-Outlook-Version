@@ -31,4 +31,5 @@ def entrypoint() -> dict:
 
 
 # Testing
-# print(get_outlook_version())
+# Note: Outlook must be installed for this to work.
+# print(entrypoint())
