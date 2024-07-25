@@ -9,7 +9,7 @@ or it returns the error message.
 
 __author__ = "Walter Reeves"
 
-from winreg import (CloseKey, EnumKey, HKEY_LOCAL_MACHINE,
+from winreg import (CloseKey, EnumKey, HKEY_CLASSES_ROOT, HKEY_LOCAL_MACHINE,
                     OpenKey, QueryInfoKey, QueryValueEx)
 
 
@@ -47,6 +47,15 @@ def entrypoint() -> dict:
 
     if len(results.keys()) > 1 and "office_error" in results.keys():
         results.pop("office_error")
+
+    try:
+        key = OpenKey(HKEY_CLASSES_ROOT, r"Outlook.Application\CurVer")
+        value, _ = QueryValueEx(key, None)
+
+        results["outlook_version"] = value
+
+    except Exception as e:
+        results["outlook_error"] = f"{e}"
 
     return results
 
